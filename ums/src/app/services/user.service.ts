@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
+import { User } from '../interfaces/user';
 
 @Injectable()
 export class UserService {
 
-    users =  [
+    users: Array<User> =  [ // o anche User[]
         {
             name: "Mario",
             lastname: "Rossi",

@@ -1,5 +1,6 @@
-import { UserService } from './../users/user.service';
+import { UserService } from '../services/user.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { User } from '../interfaces/user';
 
 @Component({
   // inputs: ['user:user-data'], // Alternativa per @input
@@ -9,7 +10,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class UserComponent implements OnInit {
 
-  @Input('user-data') user; // user-data è un alias
+  @Input('user-data') user : User; // user-data è un alias
   @Output('onDeleteUser') userDeleted = new EventEmitter(); // Evento di cancellazione
 
   constructor(private userService: UserService) { }
