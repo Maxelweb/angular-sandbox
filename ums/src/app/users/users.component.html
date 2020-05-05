@@ -9,12 +9,5 @@
         <th>Provincia</th>
         <th>Cell</th>
     </tr>
-    <tr *ngFor="let user of users">
-        <td>{{ user.name }}</td>
-        <td>{{ user.lastname }}</td>
-        <td>{{ user.fiscalcode }}</td>
-        <td>{{ user.email }}</td>
-        <td>{{ user.fiscalcode }}</td>
-        <td>{{ user.phone }}</td>
-    </tr>
+    <tr app-user *ngFor="let user of users" [user-data]="user"></tr>
 </table>
