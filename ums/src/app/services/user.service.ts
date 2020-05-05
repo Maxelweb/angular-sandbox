@@ -1,41 +1,45 @@
 import { Injectable } from '@angular/core';
-import { User } from '../interfaces/user';
+import { User } from '../classes/User';
 
 @Injectable()
 export class UserService {
 
     users: Array<User> =  [ // o anche User[]
         {
+            id: 1,
             name: "Mario",
             lastname: "Rossi",
             email: "mariorossi@email.it",
             fiscalcode: "F192393FF83493",
             province: "PD",
-            phone: "13939404"
+            phone: 13939404
         },
         {
+            id: 2,
             name: "Mario2",
             lastname: "Rossi2",
             email: "mariorossi2@email.it",
             fiscalcode: "C192393FF83493",
             province: "PD",
-            phone: "13939404"
+            phone: 13939404
         },
         {
+            id: 3,
             name: "Mario3",
             lastname: "Rossi3",
             email: "mariorossi3@email.it",
             fiscalcode: "A192393FF83493",
             province: "VE",
-            phone: "13939404"
+            phone: 13939404
         },
         {
+            id: 4,
             name: "Mario4",
             lastname: "Rossi4",
             email: "mariorossi4@email.it",
             fiscalcode: "B192393FF83493",
             province: "PD",
-            phone: "13939404"
+            phone: 13939404
         },
     ];
 
