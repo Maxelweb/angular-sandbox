@@ -1,5 +1,5 @@
 import { UserService } from './user.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
     selector: "app-users",
@@ -8,11 +8,14 @@ import { Component } from '@angular/core';
     styleUrls: ["users.component.css"]
 })
 
-export class UsersComponent {
+export class UsersComponent implements OnInit {
 
     title: "Users";
     users = [];
-    constructor(service: UserService) {
-        this.users = service.getUsers();
+    constructor(private service: UserService) {
+    }
+
+    ngOnInit() {
+        this.users = this.service.getUsers();
     }
 }
