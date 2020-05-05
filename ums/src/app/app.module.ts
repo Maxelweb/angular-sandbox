@@ -1,3 +1,4 @@
+import { UsersComponent } from './users/users.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -5,7 +6,8 @@ import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule
