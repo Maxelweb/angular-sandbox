@@ -5,3 +5,32 @@ body{
     color: #333333;
     font-size: 10pt; 
 }
+
+.main {
+    width: 98%;
+    margin: auto;
+    vertical-align: top;
+}
+
+.users {
+    float: left;
+    width: 100%;
+}
+
+.userDetail {
+    float: right;
+    width: 100%;
+}
+
+.form-group {
+    padding: 10px;
+}
+
+label {
+    margin-right: 10px;
+}
+
+form {
+    background-color: aliceblue;
+    margin: 50px auto;
+}

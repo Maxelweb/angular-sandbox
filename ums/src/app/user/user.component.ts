@@ -12,6 +12,7 @@ export class UserComponent implements OnInit {
 
   @Input('user-data') user : User; // user-data è un alias
   @Output('onDeleteUser') userDeleted = new EventEmitter(); // Evento di cancellazione
+  @Output() onSelectUser = new EventEmitter();
 
   constructor(private userService: UserService) { }
 
@@ -21,6 +22,10 @@ export class UserComponent implements OnInit {
   deleteUser(){
     this.userDeleted.emit(this.user); // Emissione Evento
     // this.userService.deleteUsers(this.user);
+  }
+
+  updateUser(){
+    this.onSelectUser.emit(this.user);
   }
 
 }
