@@ -3,3 +3,12 @@ td{
     color: #333333;
     border: 1px solid #CCC;
 }
+
+button.delete{
+    color: red;
+    padding: 3px 5px;
+    background-color: #F0F0F0;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: 1px solid #666666;
+}
