@@ -1,0 +1,10 @@
+<h3>{{ title }} #{{ user.id }}</h3>
+<table>
+    <tr><th>Nome</th><td>{{ user.name }}</td></tr>
+    <tr><th>Cognome</th><td>{{ user.lastname }}</td></tr>
+    <tr><th>Codice Fiscale</th><td>{{ user.fiscalcode }}</td></tr>
+    <tr><th>Email</th><td>{{ user.email }}</td></tr>
+    <tr><th>Provincia</th><td>{{ user.province }}</td></tr>
+    <tr><th>Telefono</th><td>{{ user.phone }}</td></tr>
+    <tfoot><tr><td colspan="2"><button (click)="backToUsers();">&larr; Go back</button></td></tr></tfoot>
+</table>

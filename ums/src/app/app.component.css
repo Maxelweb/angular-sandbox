@@ -12,3 +12,12 @@ td, th{
 th{
     background-color: #cccccc;
 }
+
+.main{
+    margin: 2em auto;
+}
+
+footer{
+    margin: 2em auto;
+    padding: 10px 0;
+}

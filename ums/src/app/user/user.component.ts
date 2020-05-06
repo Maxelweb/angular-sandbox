@@ -1,6 +1,7 @@
 import { UserService } from '../services/user.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { User } from '../classes/User';
+import { Router } from '@angular/router';
 
 @Component({
   // inputs: ['user:user-data'], // Alternativa per @input
@@ -14,7 +15,7 @@ export class UserComponent implements OnInit {
   @Output('onDeleteUser') userDeleted = new EventEmitter(); // Evento di cancellazione
   @Output() onSelectUser = new EventEmitter();
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private route: Router) { }
 
   ngOnInit(): void {
   }
@@ -25,7 +26,12 @@ export class UserComponent implements OnInit {
   }
 
   updateUser(){
+    this.route.navigate(['users', this.user.id, 'edit']);
     this.onSelectUser.emit(this.user);
+  }
+
+  showUserDetail() {
+    this.route.navigate(['users', this.user.id]);
   }
 
 }

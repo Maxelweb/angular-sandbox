@@ -13,12 +13,10 @@ body{
 }
 
 .users {
-    float: left;
     width: 100%;
 }
 
 .userDetail {
-    float: right;
     width: 100%;
 }
 

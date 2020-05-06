@@ -1,0 +1,10 @@
+td,th{
+    text-align: left;
+    border-bottom: 1px solid #CCC;
+    border-right: 1px solid #CCC;
+    padding: 10px 5px;
+}
+th{
+    background-color: #666;
+    color: whitesmoke;
+}

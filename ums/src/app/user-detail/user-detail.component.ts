@@ -1,6 +1,7 @@
 import { UserService } from './../services/user.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { User } from '../classes/User';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-detail',
@@ -19,13 +20,21 @@ export class UserDetailComponent implements OnInit {
   get user() {
     return this.__user;
   }
-  userService: UserService;
 
-  constructor(userService: UserService) { 
-    this.userService = userService; 
+  constructor(private userService: UserService, 
+    private route: ActivatedRoute,
+    private router: Router) { 
+    
   }
 
-  ngOnInit(): void {}
+  // Inizializzazione della vista
+  ngOnInit(): void {
+    this.user = new User();
+    this.route.params.subscribe( (params) => {
+      if(!params.id) return;
+      this.user = this.userService.getUser(+params.id);
+    });
+  }
 
   saveUser() {
     if(this.user.id > 0) {
@@ -33,6 +42,7 @@ export class UserDetailComponent implements OnInit {
     } else {
       this.userService.createUser(this.user);
     }
+    this.router.navigate(['users']);
   }
 
   resetForm(form) {

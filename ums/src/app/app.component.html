@@ -1,13 +1,13 @@
 <h1>User management System</h1>
 
-<a href="#" (click)="newUser()">New user</a>
-<br><br>
+<a href="#" routerLink="">Home</a> - 
+<a href="#" routerLink="users">Users</a> - 
+<a href="#" routerLink="users/new">New user</a>
 
 <div class="main">
-    <div class="users">
-        <app-users (updateUser)="updateUser($event)"></app-users>
-    </div>
-    <div class="userDetail" *ngIf="showForm">
-        <app-user-detail [user]="userSelected"></app-user-detail>
-    </div>
+    <router-outlet></router-outlet>
 </div>
+
+<footer>
+    Github repo - <a href="https://github.com/Maxelweb/angular-sandbox">Maxelweb/angular-sandbox</a>
+</footer>
