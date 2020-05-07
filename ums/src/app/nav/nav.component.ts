@@ -17,6 +17,16 @@ export class NavComponent implements OnInit {
     this.isUserLoggedIn = this.auth.isUserLoggedIn();
   }
 
+  signIn(e){
+    e.preventDefault();
+    this.router.navigate(['login']);
+  }
+
+  signUp(e){
+    e.preventDefault();
+    this.router.navigate(['signup']);
+  }
+
   logout(e) {
     e.preventDefault();
     this.auth.logout();

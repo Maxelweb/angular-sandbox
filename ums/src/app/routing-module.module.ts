@@ -1,3 +1,4 @@
+import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { RouteGuardService } from './route-guard.service';
 import { NgModule } from '@angular/core';
@@ -39,7 +40,13 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'signup',
+    component: SignupComponent,
+    pathMatch: 'full'
   }
 ]
 

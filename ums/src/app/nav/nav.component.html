@@ -1,4 +1,5 @@
-<a href="#" *ngIf="!isUserLoggedIn"><button>Login</button></a> &nbsp;
+<a href="#" *ngIf="!isUserLoggedIn" (click)="signIn($event)"><button>Login</button></a> &nbsp;
+<a href="#" *ngIf="!isUserLoggedIn" (click)="signUp($event)"><button>Sign up</button></a> &nbsp;
 <a href="#" *ngIf="isUserLoggedIn" (click)="logout($event)"><button>Logout</button></a> &nbsp;
 
 <a href="#" routerLink="">Home</a> &nbsp;

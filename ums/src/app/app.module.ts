@@ -11,6 +11,7 @@ import { UserDataComponent } from './user-data/user-data.component';
 import { RoutingModuleModule } from './routing-module.module';
 import { LoginComponent } from './login/login.component';
 import { NavComponent } from './nav/nav.component';
+import { SignupComponent } from './signup/signup.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { NavComponent } from './nav/nav.component';
     UserDetailComponent,
     UserDataComponent,
     LoginComponent,
-    NavComponent
+    NavComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
