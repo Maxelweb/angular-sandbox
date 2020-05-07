@@ -1,3 +1,4 @@
+import { LoginComponent } from './login/login.component';
 import { RouteGuardService } from './route-guard.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path: 'users/:id',
     component: UserDataComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   }
 ]
 

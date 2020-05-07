@@ -1,3 +1,4 @@
+import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
 import { UsersComponent } from './users/users.component';
 import { BrowserModule } from '@angular/platform-browser';
@@ -8,6 +9,7 @@ import { UserComponent } from './user/user.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { UserDataComponent } from './user-data/user-data.component';
 import { RoutingModuleModule } from './routing-module.module';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -16,14 +18,15 @@ import { RoutingModuleModule } from './routing-module.module';
     UsersComponent,
     UserComponent,
     UserDetailComponent,
-    UserDataComponent
+    UserDataComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     RoutingModuleModule
   ],
-  providers: [UserService],
+  providers: [UserService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
