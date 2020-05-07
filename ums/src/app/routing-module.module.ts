@@ -1,3 +1,4 @@
+import { RouteGuardService } from './route-guard.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsersComponent } from './users/users.component';
@@ -11,7 +12,7 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: 'users',
-    component: UsersComponent
+    component: UsersComponent, 
   },
   {
     path: '',
@@ -24,7 +25,8 @@ const routes: Routes = [
   },
   {
     path: 'users/:id/edit',
-    component: UserDetailComponent
+    component: UserDetailComponent,
+    canActivate: [ RouteGuardService ]
   },
   {
     path: 'users/:id',

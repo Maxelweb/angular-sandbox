@@ -30,9 +30,11 @@ export class UserDetailComponent implements OnInit {
   // Inizializzazione della vista
   ngOnInit(): void {
     this.user = new User();
-    this.route.params.subscribe( (params) => {
-      if(!params.id) return;
-      this.user = this.userService.getUser(+params.id);
+    this.route.paramMap.subscribe( (params) => {
+    //this.route.params.subscribe( (params) => {
+      // if(!params.id) return;
+      if(!params.get('id')) return;
+      this.user = this.userService.getUser(+params.get('id'));
     });
   }
 
