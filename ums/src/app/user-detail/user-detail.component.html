@@ -10,7 +10,12 @@
     </div>
     <div class="form-group">
         <label for="lastname">Last Name</label>
-        <input [(ngModel)]="user.lastname" name="lastname" id="lastname">
+        <input #firstName="ngModel" required minlength="3" [(ngModel)]="user.lastname" name="lastname" id="lastname">
+        <div *ngIf="firstName.dirty && firstName.touched && firstName.invalid">
+            <span *ngIf="firstName.errors.required">Il campo è richiesto</span>
+            <!-- .invalid in generale, .errors nello specifico -->
+            <span *ngIf="firstName.errors.minlength">Il campo deve avere almeno 3 caratteri</span>
+        </div>
     </div>
     <div class="form-group">
         <label for="fiscalcode">Fiscal code</label>
@@ -29,7 +34,7 @@
         <input [(ngModel)]="user.phone" name="phone" id="phone">
     </div>
     <div class="form-group form-footer">
-        <button (click)="saveUser()" class="btn-save">Save</button> &nbsp;
+        <button (click)="saveUser()" [disabled]="f.invalid" class="btn-save">Save</button> &nbsp;
         <button (click)="resetForm(f.form)">Reset</button>
     </div>
 </form>

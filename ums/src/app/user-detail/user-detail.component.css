@@ -1,0 +1,12 @@
+span {
+    background-color: brown;
+    color: whitesmoke;
+    font-size: 90%;
+    padding: 3px;
+    margin: 10px auto;
+    display: block;
+}
+
+input.ng-invalid.ng-dirty.ng-touched{
+    border: 1px solid brown;
+}
