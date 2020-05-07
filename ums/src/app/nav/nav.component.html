@@ -1,7 +1,8 @@
 <a href="#" *ngIf="!isUserLoggedIn" (click)="signIn($event)"><button>Login</button></a> &nbsp;
 <a href="#" *ngIf="!isUserLoggedIn" (click)="signUp($event)"><button>Sign up</button></a> &nbsp;
+{{ username }} &nbsp;
 <a href="#" *ngIf="isUserLoggedIn" (click)="logout($event)"><button>Logout</button></a> &nbsp;
 
-<a href="#" routerLink="">Home</a> &nbsp;
-<a href="#" routerLink="users">Users</a> &nbsp;
-<a href="#" routerLink="users/new">New user</a>
+<a href="#" *ngIf="isUserLoggedIn" routerLink="">Home</a> &nbsp;
+<a href="#" *ngIf="isUserLoggedIn" routerLink="users">Users</a> &nbsp;
+<a href="#" *ngIf="isUserLoggedIn" routerLink="users/new">New user</a>

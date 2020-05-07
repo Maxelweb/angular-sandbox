@@ -1,6 +1,7 @@
 import { Router } from '@angular/router';
 import { AuthService } from './../services/auth.service';
 import { Component, OnInit } from '@angular/core';
+import { User } from '../classes/User';
 
 @Component({
   selector: 'app-nav',
@@ -8,10 +9,29 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-
+  public username: string;
   public isUserLoggedIn = false;
 
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor(private auth: AuthService, private router: Router) { 
+    auth.usersignedin.subscribe(
+      (user: User) => { 
+        this.username = user.name;
+        this.isUserLoggedIn = true;
+      }
+    );
+    auth.usersignedup.subscribe(
+      (user: User) => { 
+        this.username = user.name;
+        this.isUserLoggedIn = true;
+      }
+    );
+    auth.userlogout.subscribe(
+      () => { 
+        this.username = '';
+        this.isUserLoggedIn = false;
+      }
+    );
+  }
 
   ngOnInit(): void {
     this.isUserLoggedIn = this.auth.isUserLoggedIn();
@@ -30,7 +50,9 @@ export class NavComponent implements OnInit {
   logout(e) {
     e.preventDefault();
     this.auth.logout();
-    this.router.navigate(['login']);
+    setTimeout(() => {
+      this.router.navigate(['login']);
+    }, 300);
   }
 
 }
