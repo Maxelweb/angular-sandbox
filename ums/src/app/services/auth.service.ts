@@ -4,16 +4,22 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AuthService {
-  private isUserLogged = true;
+  private isUserLogged = false;
 
   constructor() { }
 
   isUserLoggedIn() {
+    // Trasformazione booleana: se esiste, sarà true, altrimenti sarà false.
+    this.isUserLogged = !!localStorage.getItem('token');
     return this.isUserLogged;
   }
 
   signIn(email: string, password: string){
 
+    // Controlli...
+
+    localStorage.setItem('token', email);
+    return true;
   }
 
   signUp(username: string, email: string, password: string){
@@ -21,6 +27,7 @@ export class AuthService {
   }
 
   logout(){
+    localStorage.removeItem('token');
     this.isUserLogged = false;
   }
 }
