@@ -1,40 +1,59 @@
+import { AuthService } from './auth.service';
 import { Injectable } from '@angular/core';
 import { User } from '../classes/User';
 import { UserInterface } from '../interfaces/user';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable()
 export class UserService {
 
     private APIURL = 'http://localhost:8000/users'
 
-    constructor(private http: HttpClient){
+    constructor(private http: HttpClient, private auth: AuthService){
 
     }
 
     users: Array<User> =  [ ];
 
+
+    getAuthHeader() {
+        let header = new HttpHeaders(
+            {
+                Authorization: 'Bearer ' + this.auth.getToken()
+            }
+        )
+        return header;
+    }
+
     getUsers() {
-        return this.http.get(this.APIURL);
+        return this.http.get(this.APIURL, {
+            headers: this.getAuthHeader()
+        });
     }
 
     getUser(id: number){
-        return this.http.get(this.APIURL + '/' + id);
+        return this.http.get(this.APIURL + '/' + id, {
+            headers: this.getAuthHeader()
+        });
     }
 
     deleteUsers(user) {
-        let index = this.users.indexOf(user);
-        if(index >= 0){
-            this.users.splice(index, 1);
-        }
+        const data = { _method : 'DELETE'}; 
+        return this.http.post(this.APIURL + '/' + user.id, data, {
+            headers: this.getAuthHeader()
+        });
     }
 
     updateUser(user: UserInterface) {
         user['_method'] = 'PUT';
-        return this.http.post(this.APIURL + '/' + user.id, user);
+        return this.http.post(this.APIURL + '/' + user.id, user, {
+            headers: this.getAuthHeader()
+        });
     }
 
     createUser(user: UserInterface) {
-        return this.http.post(this.APIURL, user);
+        return this.http.post(this.APIURL, user, {
+            headers: this.getAuthHeader()
+        });
     }
 }
