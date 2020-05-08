@@ -38,8 +38,7 @@ export class UserService {
     }
 
     deleteUsers(user) {
-        const data = { _method : 'DELETE'}; 
-        return this.http.post(this.APIURL + '/' + user.id, data, {
+        return this.http.delete(this.APIURL + '/' + user.id, {
             headers: this.getAuthHeader()
         });
     }

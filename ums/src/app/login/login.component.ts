@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { AuthService } from './../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { User } from '../classes/User';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,13 @@ import { NgForm } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor(private auth: AuthService, private router: Router) {
+    auth.usersignedin.subscribe(
+      (user: User) => {
+        router.navigate(['users'])
+      }
+    );
+  }
 
   ngOnInit(): void {
   }

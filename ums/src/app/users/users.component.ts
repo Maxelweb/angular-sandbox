@@ -27,12 +27,14 @@ export class UsersComponent implements OnInit {
     onDeleteUser(user: User) {
         this.service.deleteUsers(user).subscribe(
             (response) => {
-                this.users = response['data'];
                 const idx = this.users.indexOf(user);
                 this.users.splice(idx, 1);
                 alert(response['message']);
             },
-            (error) => alert(error.message));
+            (error) => {
+                alert(error.message);
+            }
+        );
     }
     onSelectUser(user: User){
         // this.updateUser.emit(user);

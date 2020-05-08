@@ -42,25 +42,36 @@ export class AuthService {
         user.name = payload.user_name;
         user.email = payload.email;
         this.usersignedin.emit(user);
-        return true; 
       },
       (httpResp: HttpErrorResponse) => {
         alert(httpResp.message);
-        return false;
       } 
     ); 
-
     return true;
   }
 
   signUp(username: string, email: string, password: string){
-    localStorage.setItem('token', email);
-
-    let user = new User();
+    
+    const user = new User();
     user.name = username;
     user.email = email;
-    this.usersignedup.emit(user); 
 
+    this.http.post(this.APIAUTHURL + 'signup', {
+      email: email,
+      password: password,
+      name: username
+    }).subscribe(
+      (payload: Jwt) => {
+        localStorage.setItem('token', payload.access_token);
+        localStorage.setItem('user', JSON.stringify(payload));
+        this.usersignedup.emit(user);
+      },
+      (httpResp: HttpErrorResponse) => {
+        alert(httpResp.message);
+      } 
+    ); 
+
+    this.usersignedup.emit(user);
     return true;
   }
 
