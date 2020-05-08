@@ -17,12 +17,34 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  signIn(form: NgForm){
+  /* Metodo 1 promise and async */
+
+  async signIn(form: NgForm){
     if(!form.valid)
       return false;
 
+    try{
 
-    /* Metodo 1 subscribe + pipe from rjxs */
+      const resp = await this.auth.signIn(form.value.email, form.value.password)
+      .toPromise();
+      alert(resp.user_name + " - logged in successfully");
+      this.router.navigate(['users']);
+
+    } catch (e) {
+      switch (e.status) {
+        case 401: 
+          alert(e.error.error);
+          break;
+        case 404: 
+          alert(e.statusText);
+          break;
+        case 500:
+          alert('Error contacting server');
+          break;
+      }
+    }
+
+    /* Metodo 1 subscribe + pipe from rjxs 
 
     this.auth.signIn(form.value.email, form.value.password)
       .subscribe(
@@ -34,5 +56,6 @@ export class LoginComponent implements OnInit {
           alert(err.error);
         }
       );
+    */
   }
 }
