@@ -1,55 +1,25 @@
 import { Injectable } from '@angular/core';
 import { User } from '../classes/User';
 import { UserInterface } from '../interfaces/user';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class UserService {
 
-    users: Array<User> =  [ // o anche User[]
-        {
-            id: 1,
-            name: "Mario",
-            lastname: "Rossi",
-            email: "mariorossi@email.it",
-            fiscalcode: "F192393FF83493",
-            province: "PD",
-            phone: 13939404
-        },
-        {
-            id: 2,
-            name: "Mario2",
-            lastname: "Rossi2",
-            email: "mariorossi2@email.it",
-            fiscalcode: "C192393FF83493",
-            province: "PD",
-            phone: 13939404
-        },
-        {
-            id: 3,
-            name: "Mario3",
-            lastname: "Rossi3",
-            email: "mariorossi3@email.it",
-            fiscalcode: "A192393FF83493",
-            province: "VE",
-            phone: 13939404
-        },
-        {
-            id: 4,
-            name: "Mario4",
-            lastname: "Rossi4",
-            email: "mariorossi4@email.it",
-            fiscalcode: "B192393FF83493",
-            province: "PD",
-            phone: 13939404
-        },
-    ];
+    private APIURL = 'http://localhost:8000/users'
+
+    constructor(private http: HttpClient){
+
+    }
+
+    users: Array<User> =  [ ];
 
     getUsers() {
-        return this.users;
+        return this.http.get(this.APIURL);
     }
 
     getUser(id: number){
-        return this.users.find(user => user.id === id);
+        return this.http.get(this.APIURL + '/' + id);
     }
 
     deleteUsers(user) {
@@ -60,15 +30,11 @@ export class UserService {
     }
 
     updateUser(user: UserInterface) {
-        const index = this.users.findIndex((v) => v.id === user.id);
-        //alert(index);
-        if(index !== -1){
-            this.users[index] = user; 
-        }
+        user['_method'] = 'PUT';
+        return this.http.post(this.APIURL + '/' + user.id, user);
     }
 
     createUser(user: UserInterface) {
-        user.id = this.users.length + 1; 
-        this.users.splice(0, 0, user);
+        return this.http.post(this.APIURL, user);
     }
 }

@@ -12,6 +12,7 @@ import { RoutingModuleModule } from './routing-module.module';
 import { LoginComponent } from './login/login.component';
 import { NavComponent } from './nav/nav.component';
 import { SignupComponent } from './signup/signup.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { SignupComponent } from './signup/signup.component';
   imports: [
     BrowserModule,
     FormsModule,
-    RoutingModuleModule
+    RoutingModuleModule,
+    HttpClientModule,
   ],
   providers: [UserService, AuthService],
   bootstrap: [AppComponent]

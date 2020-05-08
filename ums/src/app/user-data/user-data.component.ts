@@ -19,8 +19,11 @@ export class UserDataComponent implements OnInit {
   ngOnInit(): void {
     this.user = new User(); // Fallback iniziale
     // Iscrizione al 'backend' e caricamento dei dati
-    this.route.paramMap.subscribe( (p) => {
-      this.user = this.userService.getUser(+p.get('id'));
+    this.route.params.subscribe( 
+      (p) => {
+        this.userService.getUser(+p.id).subscribe(
+          response => this.user = response['data']
+        );
     })
   }
 

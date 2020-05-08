@@ -34,17 +34,40 @@ export class UserDetailComponent implements OnInit {
     //this.route.params.subscribe( (params) => {
       // if(!params.id) return;
       if(!params.get('id')) return;
-      this.user = this.userService.getUser(+params.get('id'));
+      this.userService.getUser(+params.get('id')).subscribe(
+        response => this.user = response['data']
+      );
     });
   }
 
   saveUser() {
     if(this.user.id > 0) {
-      this.userService.updateUser(this.user);
+      this.updateUser(this.user);
     } else {
-      this.userService.createUser(this.user);
+      this.createUser(this.user);
     }
-    this.router.navigate(['users']);
+  }
+
+  updateUser(user: User){
+    this.userService.updateUser(this.user).subscribe(response => {const user = response['data'] as User; 
+      if(response['success']) 
+        alert("Modificato con successo!"); 
+      else 
+        alert(response['message']);
+      
+      this.router.navigate(['users']);
+    });
+  }
+
+  createUser(user: User){
+    this.userService.createUser(this.user).subscribe(response => {const user = response['data'] as User; 
+      if(response['success']) 
+        alert("Aggiunto con successo!"); 
+      else 
+        alert(response['message']);
+      
+      this.router.navigate(['users']);
+    });
   }
 
   resetForm(form) {
