@@ -1,7 +1,7 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
 import { User } from '../classes/User';
-import { HttpClient, HttpHeaderResponse, HttpErrorResponse } from '@angular/common/http';
-
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { tap } from 'rxjs/operators';
 
 interface Jwt {
   access_token: string; 
@@ -31,23 +31,22 @@ export class AuthService {
 
   signIn(email: string, password: string){
 
-    this.http.post(this.APIAUTHURL + 'login', {
+    return this.http.post(this.APIAUTHURL + 'login', {
       email: email,
       password: password
-    }).subscribe(
-      (payload: Jwt) => {
-        localStorage.setItem('token', payload.access_token);
-        localStorage.setItem('user', JSON.stringify(payload));
-        let user = new User();
-        user.name = payload.user_name;
-        user.email = payload.email;
-        this.usersignedin.emit(user);
-      },
-      (httpResp: HttpErrorResponse) => {
-        alert(httpResp.message);
-      } 
+    }).pipe(
+      tap(
+        (payload: Jwt) => {
+          localStorage.setItem('token', payload.access_token);
+          localStorage.setItem('user', JSON.stringify(payload));
+          let user = new User();
+          user.name = payload.user_name;
+          user.email = payload.email;
+          this.usersignedin.emit(user);
+          return true;
+        } 
+      )
     ); 
-    return true;
   }
 
   signUp(username: string, email: string, password: string){

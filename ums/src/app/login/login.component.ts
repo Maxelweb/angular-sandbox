@@ -12,11 +12,6 @@ import { User } from '../classes/User';
 export class LoginComponent implements OnInit {
 
   constructor(private auth: AuthService, private router: Router) {
-    auth.usersignedin.subscribe(
-      (user: User) => {
-        router.navigate(['users'])
-      }
-    );
   }
 
   ngOnInit(): void {
@@ -26,9 +21,18 @@ export class LoginComponent implements OnInit {
     if(!form.valid)
       return false;
 
-    let result = this.auth.signIn(form.value.email, form.value.password);
-    if(result){
-      this.router.navigate(['users']);
-    }
+
+    /* Metodo 1 subscribe + pipe from rjxs */
+
+    this.auth.signIn(form.value.email, form.value.password)
+      .subscribe(
+        (payload) => {
+          alert("Login corretto");
+          this.router.navigate(['users']);
+        },
+        ({error: err}) => {
+          alert(err.error);
+        }
+      );
   }
 }
